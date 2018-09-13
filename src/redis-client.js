@@ -13,6 +13,8 @@ module.exports = {
     getNewInstance(config = {}) {
         const { redis: options = {} } = config;
         const c = redis.createClient(options);
+        const pass = options.password;
+        pass && c.auth(pass);
         clients.push(c);
         return c;
     },
